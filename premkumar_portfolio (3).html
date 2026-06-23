@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>M. Premkumar — Automation & ECE Engineer</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #1A1A2E;
+    --navy-mid: #2d2d4e;
+    --accent: #4A6FA5;
+    --accent-light: #e8edf5;
+    --text: #1a1a2e;
+    --text-sec: #555;
+    --text-muted: #888;
+    --border: #e0e0e0;
+    --bg: #ffffff;
+    --bg-sec: #f8f9fc;
+    --card-bg: #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2.5rem; height: 56px;
+  }
+  .nav-logo { font-weight: 700; font-size: 1rem; color: var(--navy); letter-spacing: 0.5px; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--text-sec); font-size: 0.875rem; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--navy); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center;
+    padding: 80px 2rem 4rem;
+    background: linear-gradient(160deg, #f8f9fc 0%, #eef1f8 100%);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -120px; right: -120px;
+    width: 480px; height: 480px;
+    background: radial-gradient(circle, rgba(26,26,46,0.06) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 1px;
+    padding: 5px 14px; border-radius: 20px;
+    margin-bottom: 1.5rem; text-transform: uppercase;
+  }
+  .hero h1 {
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    font-weight: 800; color: var(--navy);
+    line-height: 1.1; margin-bottom: 0.75rem;
+    letter-spacing: -1px;
+  }
+  .hero-sub {
+    font-size: 1.1rem; color: var(--text-sec);
+    max-width: 580px; margin: 0 auto 0.5rem;
+  }
+  .hero-tagline {
+    font-size: 0.9rem; color: var(--accent);
+    font-style: italic; margin-bottom: 2rem;
+    max-width: 520px;
+  }
+  .hero-contacts {
+    display: flex; flex-wrap: wrap; gap: 0.75rem;
+    justify-content: center; margin-bottom: 2rem;
+  }
+  .contact-chip {
+    display: flex; align-items: center; gap: 6px;
+    background: white; border: 1px solid var(--border);
+    border-radius: 8px; padding: 6px 14px;
+    font-size: 0.82rem; color: var(--text-sec);
+    text-decoration: none; transition: border-color 0.2s, color 0.2s;
+  }
+  .contact-chip:hover { border-color: var(--accent); color: var(--navy); }
+  .contact-chip svg { width: 14px; height: 14px; flex-shrink: 0; }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+  .btn-primary {
+    background: var(--navy); color: white;
+    padding: 10px 24px; border-radius: 8px;
+    text-decoration: none; font-size: 0.875rem; font-weight: 600;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: var(--navy-mid); }
+  .btn-outline {
+    background: transparent; color: var(--navy);
+    border: 1.5px solid var(--navy);
+    padding: 10px 24px; border-radius: 8px;
+    text-decoration: none; font-size: 0.875rem; font-weight: 600;
+    transition: background 0.2s, color 0.2s;
+  }
+  .btn-outline:hover { background: var(--navy); color: white; }
+
+  /* SECTIONS */
+  section { padding: 5rem 2rem; }
+  .container { max-width: 860px; margin: 0 auto; }
+  .sec-label {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+  .sec-title {
+    font-size: 1.8rem; font-weight: 800; color: var(--navy);
+    margin-bottom: 2.5rem; position: relative;
+  }
+  .sec-title::after {
+    content: ''; display: block;
+    width: 48px; height: 3px;
+    background: var(--accent); border-radius: 2px;
+    margin-top: 10px;
+  }
+
+  /* ABOUT */
+  .about { background: var(--bg); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+  .about-text p { color: var(--text-sec); margin-bottom: 1rem; }
+  .about-text strong { color: var(--navy); }
+  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .stat-card {
+    background: var(--bg-sec); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.1rem 1.2rem; text-align: center;
+  }
+  .stat-num { font-size: 1.6rem; font-weight: 800; color: var(--navy); }
+  .stat-label { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
+
+  /* EDUCATION */
+  .education { background: var(--bg-sec); }
+  .edu-timeline { display: flex; flex-direction: column; gap: 1.25rem; }
+  .edu-card {
+    background: white; border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.25rem 1.5rem;
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 1rem;
+  }
+  .edu-card:first-child { border-left: 4px solid var(--navy); }
+  .edu-card:nth-child(2) { border-left: 4px solid var(--accent); }
+  .edu-card:nth-child(3) { border-left: 4px solid #9eb3d4; }
+  .edu-degree { font-weight: 700; color: var(--navy); font-size: 0.95rem; }
+  .edu-school { color: var(--text-sec); font-size: 0.85rem; margin-top: 3px; }
+  .edu-meta { text-align: right; flex-shrink: 0; }
+  .edu-year { font-size: 0.78rem; color: var(--text-muted); }
+  .edu-mark {
+    display: inline-block; margin-top: 6px;
+    background: var(--accent-light); color: var(--accent);
+    font-size: 0.75rem; font-weight: 700;
+    padding: 3px 10px; border-radius: 20px;
+  }
+
+  /* INTERNSHIPS */
+  .internships { background: var(--bg); }
+  .intern-grid { display: flex; flex-direction: column; gap: 1.25rem; }
+  .intern-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.25rem 1.5rem;
+    display: grid; grid-template-columns: auto 1fr; gap: 0 1.2rem;
+  }
+  .intern-icon {
+    width: 42px; height: 42px; border-radius: 10px;
+    background: var(--navy); display: flex; align-items: center;
+    justify-content: center; flex-shrink: 0;
+    font-size: 1.2rem; margin-top: 2px;
+  }
+  .intern-body { min-width: 0; }
+  .intern-title { font-weight: 700; color: var(--navy); font-size: 0.95rem; }
+  .intern-org { color: var(--text-sec); font-size: 0.83rem; margin-top: 2px; }
+  .intern-desc { color: var(--text-muted); font-size: 0.82rem; margin-top: 6px; line-height: 1.5; }
+  .intern-date {
+    font-size: 0.72rem; color: var(--accent);
+    background: var(--accent-light); padding: 2px 8px;
+    border-radius: 12px; display: inline-block; margin-top: 8px; font-weight: 600;
+  }
+
+  /* PROJECT */
+  .projects { background: var(--bg-sec); }
+  .project-card {
+    background: white; border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.75rem;
+    border-top: 4px solid var(--navy);
+  }
+  .project-title { font-size: 1.1rem; font-weight: 800; color: var(--navy); margin-bottom: 0.5rem; }
+  .project-desc { color: var(--text-sec); margin-bottom: 1rem; font-size: 0.9rem; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tag {
+    background: var(--bg-sec); border: 1px solid var(--border);
+    color: var(--text-sec); font-size: 0.73rem; font-weight: 600;
+    padding: 3px 10px; border-radius: 6px;
+  }
+
+  /* SKILLS */
+  .skills { background: var(--bg); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+  .skill-card {
+    background: var(--bg-sec); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.1rem 1.25rem;
+  }
+  .skill-cat { font-size: 0.72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+  .skill-items { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .skill-pill {
+    background: white; border: 1px solid var(--border);
+    color: var(--text); font-size: 0.77rem;
+    padding: 3px 10px; border-radius: 20px;
+  }
+
+  /* TEEP SECTION */
+  .teep { background: var(--navy); color: white; }
+  .teep .sec-label { color: #8899cc; }
+  .teep .sec-title { color: white; }
+  .teep .sec-title::after { background: #8899cc; }
+  .teep-content { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
+  .teep-text p { color: #c5cde8; margin-bottom: 1rem; font-size: 0.9rem; }
+  .teep-text strong { color: white; }
+  .teep-facts { display: flex; flex-direction: column; gap: 0.85rem; }
+  .teep-fact {
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px; padding: 0.9rem 1.1rem;
+    display: flex; align-items: flex-start; gap: 0.75rem;
+  }
+  .teep-icon { font-size: 1.2rem; flex-shrink: 0; }
+  .teep-fact-title { font-size: 0.82rem; font-weight: 700; color: white; }
+  .teep-fact-desc { font-size: 0.77rem; color: #9aacce; margin-top: 2px; }
+
+  /* CONTACT / FOOTER */
+  .contact-footer { background: var(--bg-sec); border-top: 1px solid var(--border); padding: 3rem 2rem; text-align: center; }
+  .contact-footer h2 { font-size: 1.4rem; font-weight: 800; color: var(--navy); margin-bottom: 0.5rem; }
+  .contact-footer p { color: var(--text-sec); margin-bottom: 1.5rem; font-size: 0.9rem; }
+  .contact-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 7px;
+    background: white; border: 1px solid var(--border);
+    border-radius: 8px; padding: 8px 18px;
+    text-decoration: none; color: var(--navy);
+    font-size: 0.85rem; font-weight: 600; transition: border-color 0.2s;
+  }
+  .contact-link:hover { border-color: var(--accent); }
+  .footer-copy { font-size: 0.75rem; color: var(--text-muted); }
+
+  @media (max-width: 640px) {
+    .about-grid, .teep-content { grid-template-columns: 1fr; }
+    .about-stats { grid-template-columns: 1fr 1fr; }
+    nav { padding: 0 1rem; }
+    .nav-links { gap: 1rem; }
+    .edu-card { flex-direction: column; }
+    .edu-meta { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">M. Premkumar</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#internships">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#teep">TEEP</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Open to TEEP Taiwan Internship 2026</div>
+  <h1>M. Premkumar</h1>
+  <p class="hero-sub">Mechatronics → ECE Engineer · Automation & Sensor Systems · Industry 5.0 Thinker</p>
+  <p class="hero-tagline">"AI can lead — but human creativity finds the real problem."</p>
+
+  <div class="hero-contacts">
+    <a href="tel:7639643581" class="contact-chip">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.15 1.19 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+      7639643581
+    </a>
+    <a href="mailto:22mcs10@gmail.com" class="contact-chip">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      22mcs10@gmail.com
+    </a>
+    <a href="https://www.linkedin.com/in/premkumar-m-b38448368" target="_blank" class="contact-chip">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      LinkedIn
+    </a>
+    <span class="contact-chip">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Tiruppur, Tamil Nadu
+    </span>
+  </div>
+
+  <div class="hero-btns">
+    <a href="Premkumar_PowerResume_v3.docx" class="btn-primary" download>Download Resume</a>
+    <a href="#teep" class="btn-outline">TEEP Application</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="sec-label">Who I Am</div>
+    <h2 class="sec-title">Profile</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I am an engineering student on a unique <strong>dual-track path</strong> — Diploma in Mechatronics followed by B.E. in Electronics & Communication Engineering — intentionally bridging mechanical systems with electronics depth to build smarter automation solutions.</p>
+        <p>My passion lies in <strong>sensor-driven process control, robotic programming, and pneumatic systems</strong>. I believe Industry 5.0 is not about replacing humans — it is about building intelligent machines that amplify human judgment to solve real problems.</p>
+        <p>I am fluent in thinking across hardware and software, and I thrive when given an engineering problem to dissect, prototype, and improve.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-num">2</div>
+          <div class="stat-label">Industrial Internships</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">1</div>
+          <div class="stat-label">Published Project</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">30+</div>
+          <div class="stat-label">Days Industrial Training</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">5.0</div>
+          <div class="stat-label">Industry Focus</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="education" id="education">
+  <div class="container">
+    <div class="sec-label">Academic Background</div>
+    <h2 class="sec-title">Education</h2>
+    <div class="edu-timeline">
+
+      <div class="edu-card">
+        <div>
+          <div class="edu-degree">B.E. — Electronics & Communication Engineering</div>
+          <div class="edu-school">Nachimuthu Polytechnic College, Pollachi &nbsp;·&nbsp; Anna University &nbsp;·&nbsp; Roll: 22MCS10</div>
+        </div>
+        <div class="edu-meta">
+          <div class="edu-year">2025 – Pursuing</div>
+          <div class="edu-mark">Currently Enrolled</div>
+        </div>
+      </div>
+
+      <div class="edu-card">
+        <div>
+          <div class="edu-degree">Diploma — Mechatronics Engineering</div>
+          <div class="edu-school">Nachimuthu Polytechnic College, Pollachi &nbsp;·&nbsp; Anna University</div>
+        </div>
+        <div class="edu-meta">
+          <div class="edu-year">2022 – 2025</div>
+          <div class="edu-mark">63%</div>
+        </div>
+      </div>
+
+      <div class="edu-card">
+        <div>
+          <div class="edu-degree">SSLC (10th Grade)</div>
+          <div class="edu-school">RGM School, Udumalaipatti &nbsp;·&nbsp; Tamil Nadu State Board</div>
+        </div>
+        <div class="edu-meta">
+          <div class="edu-year">2022</div>
+          <div class="edu-mark">50%</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- INTERNSHIPS -->
+<section class="internships" id="internships">
+  <div class="container">
+    <div class="sec-label">Industrial Training</div>
+    <h2 class="sec-title">Internships</h2>
+    <div class="intern-grid">
+
+      <div class="intern-card">
+        <div class="intern-icon">🤖</div>
+        <div class="intern-body">
+          <div class="intern-title">Robot Programming — FANUC</div>
+          <div class="intern-org">MCET-FANUC Centre for Advanced Manufacturing & Robotics, Coimbatore</div>
+          <div class="intern-desc">Programmed FANUC industrial robots hands-on — motion paths, teach pendant operation, safety interlocks, and automated movement sequencing in a live manufacturing environment.</div>
+          <div class="intern-date">May 2024 · 17 days</div>
+        </div>
+      </div>
+
+      <div class="intern-card">
+        <div class="intern-icon">⚙️</div>
+        <div class="intern-body">
+          <div class="intern-title">Pneumatic Circuits & PLC Programming — JANATICS Pneumatic</div>
+          <div class="intern-org">MCET-Janatics Centre of Excellence for Mechatronics & Automation</div>
+          <div class="intern-desc">Designed and assembled pneumatic circuits. Programmed PLCs for automated sequencing and industrial control logic. Additional training at Janatics Ltd (5 days) and Boss Restore Pvt Ltd (1 week).</div>
+          <div class="intern-date">Nov – Dec 2023 · 13 days</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT -->
+<section class="projects" id="projects">
+  <div class="container">
+    <div class="sec-label">Engineering Work</div>
+    <h2 class="sec-title">Project</h2>
+    <div class="project-card">
+      <div class="project-title">Biometric Attendance Management System using RFID</div>
+      <p class="project-desc">Designed and built an end-to-end embedded attendance system combining RFID card scanning with fingerprint biometric verification, Arduino microcontroller logic, real-time LCD display, and Wi-Fi data logging via ESP8266. The system eliminates proxy attendance and automates record keeping — solving a real institutional problem with off-the-shelf hardware.</p>
+      <div class="tag-row">
+        <span class="tag">Arduino Uno</span>
+        <span class="tag">RFID RC522</span>
+        <span class="tag">Fingerprint Sensor</span>
+        <span class="tag">ESP8266 Wi-Fi</span>
+        <span class="tag">LCD Display</span>
+        <span class="tag">Embedded C</span>
+      </div>
+      <div style="margin-top:1rem; font-size:0.8rem; color:var(--text-muted);">
+        Diploma Final Year Project &nbsp;·&nbsp; Nachimuthu Polytechnic College &nbsp;·&nbsp; 2024–2025
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills" id="skills">
+  <div class="container">
+    <div class="sec-label">What I Know</div>
+    <h2 class="sec-title">Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-cat">Automation & Robotics</div>
+        <div class="skill-items">
+          <span class="skill-pill">FANUC Programming</span>
+          <span class="skill-pill">PLC</span>
+          <span class="skill-pill">Pneumatics</span>
+          <span class="skill-pill">Robot Teach Pendant</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat">Embedded Systems</div>
+        <div class="skill-items">
+          <span class="skill-pill">Arduino</span>
+          <span class="skill-pill">RFID Integration</span>
+          <span class="skill-pill">Sensor Interfacing</span>
+          <span class="skill-pill">ESP8266</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat">Electronics (ECE)</div>
+        <div class="skill-items">
+          <span class="skill-pill">Circuit Design</span>
+          <span class="skill-pill">Microcontrollers</span>
+          <span class="skill-pill">Signal Basics</span>
+          <span class="skill-pill">ECE Fundamentals</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat">Soft Skills</div>
+        <div class="skill-items">
+          <span class="skill-pill">Problem-Solving</span>
+          <span class="skill-pill">Innovation Mindset</span>
+          <span class="skill-pill">Communication</span>
+          <span class="skill-pill">Adaptability</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat">Languages</div>
+        <div class="skill-items">
+          <span class="skill-pill">Tamil (Native)</span>
+          <span class="skill-pill">English (Professional)</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat">Tools</div>
+        <div class="skill-items">
+          <span class="skill-pill">MS Word</span>
+          <span class="skill-pill">Basic CAD</span>
+          <span class="skill-pill">Arduino IDE</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEEP -->
+<section class="teep" id="teep">
+  <div class="container">
+    <div class="sec-label">Taiwan Internship Goal</div>
+    <h2 class="sec-title">Why TEEP Taiwan</h2>
+    <div class="teep-content">
+      <div class="teep-text">
+        <p>Taiwan leads the world in <strong>semiconductor manufacturing and precision automation</strong> — exactly where sensor-process integration and intelligent robotics converge. TEEP is my bridge to Asia's most advanced engineering ecosystem.</p>
+        <p>I want to work inside a Taiwanese university lab or engineering team, contribute hands-on innovation in automation or mechatronics, and return to India to advance its manufacturing sector with real international experience.</p>
+        <p>I am applying under the <strong>Engineering track</strong> with interest in Automation, Mechatronics, and Sensor Systems programs.</p>
+        <a href="https://teep.studyintaiwan.org/programs/Engineering" target="_blank" class="btn-primary" style="display:inline-block; margin-top:0.5rem;">Browse TEEP Programs ↗</a>
+      </div>
+      <div class="teep-facts">
+        <div class="teep-fact">
+          <div class="teep-icon">🎓</div>
+          <div>
+            <div class="teep-fact-title">Government Approved</div>
+            <div class="teep-fact-desc">Taiwan Ministry of Education — annual review, quality assured</div>
+          </div>
+        </div>
+        <div class="teep-fact">
+          <div class="teep-icon">💰</div>
+          <div>
+            <div class="teep-fact-title">Stipend up to 15,000 NTD/month</div>
+            <div class="teep-fact-desc">MOE-mandated maximum with dormitory accommodation</div>
+          </div>
+        </div>
+        <div class="teep-fact">
+          <div class="teep-icon">🏭</div>
+          <div>
+            <div class="teep-fact-title">Lab + Industry Placement</div>
+            <div class="teep-fact-desc">Placed in university labs, research units, or enterprises</div>
+          </div>
+        </div>
+        <div class="teep-fact">
+          <div class="teep-icon">🌐</div>
+          <div>
+            <div class="teep-fact-title">TEEP 2026 — Now Open</div>
+            <div class="teep-fact-desc">700+ new projects available across Engineering, Sciences & more</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT FOOTER -->
+<footer class="contact-footer" id="contact">
+  <h2>Let's Connect</h2>
+  <p>Open to TEEP internships, engineering collaborations, and automation projects.</p>
+  <div class="contact-links">
+    <a href="tel:7639643581" class="contact-link">📞 7639643581</a>
+    <a href="mailto:22mcs10@gmail.com" class="contact-link">✉ 22mcs10@gmail.com</a>
+    <a href="https://www.linkedin.com/in/premkumar-m-b38448368" target="_blank" class="contact-link">🔗 LinkedIn Profile</a>
+    <a href="Premkumar_PowerResume_v3.docx" download class="contact-link">⬇ Download Resume</a>
+  </div>
+  <div class="footer-copy">© 2025 M. Premkumar · Tiruppur, Tamil Nadu, India · Built for TEEP 2026 Application</div>
+</footer>
+
+</body>
+</html>
